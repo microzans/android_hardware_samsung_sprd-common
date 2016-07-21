@@ -19,42 +19,47 @@
  **                   Edit    History                                         *
  **---------------------------------------------------------------------------*
  ** DATE          Module              DESCRIPTION                             *
- ** 22/09/2013    Hardware Composer   Responsible for processing some         *
+ ** 03/06/2014    Hardware Composer   Responsible for processing some         *
  **                                   Hardware layers. These layers comply    *
  **                                   with display controller specification,  *
  **                                   can be displayed directly, bypass       *
  **                                   SurfaceFligner composition. It will     *
  **                                   improve system performance.             *
  ******************************************************************************
- ** File: SprdDisplayDevice.h         DESCRIPTION                             *
- **                                   Define some display device structures.  *
+ ** File: SprdTrace.h                 DESCRIPTION                             *
+ **                                   Add Android Framework trace info        *
+                                      for debugging                           *
  ******************************************************************************
  ******************************************************************************
  ** Author:         zhongjun.chen@spreadtrum.com                              *
  *****************************************************************************/
 
-#ifndef _SPRD_DISPLAY_DEVICE_H_
-#define _SPRD_DISPLAY_DEVICE_H_
 
-enum DisplayType {
-    DISPLAY_ID_INVALIDE = -1,
-    DISPLAY_PRIMARY = HWC_DISPLAY_PRIMARY,
-    DISPLAY_EXTERNAL = HWC_DISPLAY_EXTERNAL,
-    DISPLAY_VIRTUAL = HWC_DISPLAY_VIRTUAL,
-    NUM_BUILDIN_DISPLAY_TYPES = HWC_NUM_PHYSICAL_DISPLAY_TYPES,
-};
+#ifndef _SPRD_TRACE_H_
+#define _SPRD_TRACE_H_
 
-#define MAX_DISPLAYS HWC_NUM_DISPLAY_TYPES
 
-typedef struct _DisplayAttributes {
-    uint32_t vsync_period; //nanos
-    uint32_t xres;
-    uint32_t yres;
-    uint32_t stride;
-    float xdpi;
-    float ydpi;
-    bool connected;
-    unsigned int AcceleratorMode;
-} DisplayAttributes;
+#define ATRACE_TAG (ATRACE_TAG_GRAPHICS | ATRACE_TAG_HAL)
+
+#include <utils/Trace.h>
+#include <cutils/trace.h>
+
+
+#ifdef HWC_DEBUG_TRACE
+
+#define HWC_TRACE_CALL                                            ATRACE_CALL()
+#define HWC_TRACE_BEGIN_VSYNC        atrace_begin(ATRACE_TAG, "SprdVsyncEvent")
+#define HWC_TRACE_BEGIN_WIDIBLIT   atrace_begin(ATRACE_TAG, "SprdWIDIBLITWork")
+#define HWC_TRACE_END                                     atrace_end(ATRACE_TAG)
+
+#else
+
+#define HWC_TRACE_CALL
+#define HWC_TRACE_BEGIN_VSYNC
+#define HWC_TRACE_BEGIN_WIDIBLIT
+#define HWC_TRACE_END
+
+#endif
+
 
 #endif
