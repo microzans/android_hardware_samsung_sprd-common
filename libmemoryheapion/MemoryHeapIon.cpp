@@ -352,7 +352,7 @@ int MemoryHeapIon::flush_ion_buffer(void *v_addr, void *p_addr,int size){
         struct ion_msync_data msync_data;
         struct ion_custom_data  custom_data;
 
-        if ((v_addr<MemoryHeapBase::getBase())  ||  (v_addr+size>MemoryHeapBase::getBase()+MemoryHeapBase::getSize())){
+        if ((v_addr<MemoryHeapBase::getBase()) || (((char *)v_addr)+size>((char *)MemoryHeapBase::getBase())+MemoryHeapBase::getSize())){
              ALOGE("flush_ion_buffer error  mBase=0x%x,mSize=0x%x",MemoryHeapBase::getBase(), MemoryHeapBase::getSize());
              ALOGE("flush_ion_buffer error  v_addr=0x%x,p_addr=0x%x,size=0x%x",v_addr,p_addr,size);
              return -3;
