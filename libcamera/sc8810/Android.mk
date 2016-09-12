@@ -18,6 +18,7 @@ LOCAL_C_INCLUDES := \
         external/jhead \
         external/sqlite/dist \
     system/media/camera/include \
+    $(TOP)/hardware/samsung/sprd/libmemoryheapion \
 	$(TOP)/hardware/samsung/sprd/kernel_headers/sc8810 \
 	$(TOP)/hardware/samsung/sprd/gralloc/sc8810 \
 	$(TOP)/hardware/samsung/sprd/mali/sc8810/src/ump/include \
