@@ -1,4 +1,6 @@
 LOCAL_PATH := $(call my-dir)
+
+ifeq ($(TARGET_BOARD_PLATFORM),sc8810)
 include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := \
@@ -21,4 +23,4 @@ LOCAL_MODULE := libstagefrighthw
 LOCAL_CFLAGS:= -DLOG_TAG=\"$(TARGET_BOARD_PLATFORM).libstagefright\"
 
 include $(BUILD_SHARED_LIBRARY)
-
+endif

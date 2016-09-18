@@ -17,6 +17,8 @@
 
 LOCAL_PATH := $(call my-dir)
 
+ifneq ($(filter sc8830 scx15,$(TARGET_BOARD_PLATFORM)),)
+
 include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := \
@@ -49,3 +51,4 @@ LOCAL_MODULE := libstagefrighthw
 LOCAL_CFLAGS:= -DLOG_TAG=\"$(TARGET_BOARD_PLATFORM).libstagefright\"
 
 include $(BUILD_SHARED_LIBRARY)
+endif
